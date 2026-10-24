@@ -1,0 +1,150 @@
+/* ============ 1. VARIÁVEIS (troque cores e fontes aqui) ============ */
+:root{
+  --blue:#4060F5;
+  --blue-dark:#2B45C9;
+  --ink:#141A3A;
+  --muted:#5B6385;
+  --paper:#FAFBFF;
+  --mist:#EEF1FF;
+  --line:#DCE2FF;
+  --radius:18px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1080px,100% - 40px);margin-inline:auto}
+section{padding:clamp(64px,10vw,120px) 0}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
+.lead{color:var(--muted);max-width:56ch;margin-bottom:36px}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;padding:15px 30px;border-radius:999px;border:0;cursor:pointer;font-size:1rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s}
+.btn:hover{background:var(--blue-dark);transform:translateY(-3px);box-shadow:0 14px 28px -10px rgba(64,96,245,.6)}
+.btn:active{transform:translateY(0)}
+
+/* ============ 2. CABEÇALHO ============ */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,box-shadow .3s}
+header.scrolled{background:rgba(250,251,255,.88);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--serif);font-size:1.25rem;font-weight:600;text-decoration:none;color:var(--blue)}
+nav ul{display:flex;gap:26px;list-style:none}
+nav a{text-decoration:none;font-size:.92rem;color:var(--muted);position:relative;padding:6px 0;transition:color .25s}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+nav a:hover,nav a.active{color:var(--blue)}
+nav a:hover::after,nav a.active::after{transform:scaleX(1)}
+.menu{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;color:var(--ink)}
+.menu span,.menu span::before,.menu span::after{display:block;width:22px;height:2px;background:currentColor;margin:auto;position:relative;transition:transform .3s,background .3s}
+.menu span::before,.menu span::after{content:"";position:absolute;left:0}
+.menu span::before{top:-7px}.menu span::after{top:7px}
+.menu[aria-expanded="true"] span{background:transparent}
+.menu[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+.menu[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+
+/* ============ 3. HERO ============ */
+#inicio{min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;position:relative;overflow:hidden}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,6vw,80px);align-items:center}
+.hero h1{font-family:var(--sans);font-weight:800;font-size:clamp(2.8rem,8.4vw,6.2rem);line-height:.95;letter-spacing:-.04em;color:var(--blue)}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span i{display:block;font-style:normal;transform:translateY(105%);animation:rise 1s var(--ease) forwards}
+.hero h1 span:nth-child(2) i{animation-delay:.12s}
+.role{font-family:var(--serif);font-size:clamp(1.15rem,2.4vw,1.5rem);margin:22px 0 14px;opacity:0;animation:fade .8s .5s forwards}
+.hero p.about{color:var(--muted);max-width:46ch;margin-bottom:32px;opacity:0;animation:fade .8s .65s forwards}
+.hero .btn{opacity:0;animation:fade .8s .8s forwards}
+@keyframes rise{to{transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.photo{position:relative;aspect-ratio:4/5;max-width:380px;justify-self:center;width:100%;opacity:0;animation:fade 1s .3s forwards}
+.photo .shape,.photo .frame{position:absolute;inset:0;border-radius:var(--radius);transition:transform .25s ease-out}
+.photo .shape{background:var(--blue);transform:translate(var(--sx,18px),var(--sy,18px))}
+.photo .frame{background:var(--mist);overflow:hidden;display:grid;place-items:center;transform:translate(var(--fx,0),var(--fy,0));border:1px solid var(--line)}
+.photo .frame b{font-family:var(--serif);font-size:5rem;font-weight:500;color:var(--blue);opacity:.35}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.scroll-hint{position:absolute;bottom:22px;left:50%;width:1px;height:46px;background:linear-gradient(var(--blue),transparent);animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ============ 4. INTRODUÇÃO ============ */
+#sobre{background:var(--mist)}
+.intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,6vw,80px)}
+.intro p{font-size:clamp(1.05rem,2vw,1.2rem);margin-bottom:1.1em;max-width:62ch}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.tags li{list-style:none;background:#fff;border:1px solid var(--line);padding:6px 16px;border-radius:999px;font-size:.9rem;transition:all .3s var(--ease)}
+.tags li:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-2px)}
+
+/* ============ 5. MÍDIAS ============ */
+#projetos{padding-bottom:0}
+.media{border-radius:var(--radius);overflow:hidden;background:var(--ink);box-shadow:0 30px 60px -30px rgba(20,26,58,.45);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.media:hover{transform:translateY(-4px);box-shadow:0 40px 70px -30px rgba(64,96,245,.5)}
+.media video{width:100%;aspect-ratio:16/9;background:#000}
+.audio-card{display:flex;align-items:center;gap:22px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .3s,transform .3s var(--ease)}
+.audio-card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.audio-card .ic{width:56px;height:56px;border-radius:50%;background:var(--blue);display:grid;place-items:center;flex:none}
+.audio-card .ic svg{width:24px;height:24px;fill:#fff}
+.audio-card div.txt{flex:1 1 160px}
+.audio-card strong{font-family:var(--serif);font-weight:500;font-size:1.2rem}
+.audio-card p{color:var(--muted);font-size:.92rem}
+audio{width:100%;accent-color:var(--blue)}
+.zoom{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--mist);aspect-ratio:1408/768;display:grid;place-items:center;border:1px solid var(--line)}
+.zoom img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease),filter .6s}
+.zoom:hover img{transform:scale(1.07);filter:saturate(1.15)}
+.zoom::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(64,96,245,.55));opacity:0;transition:opacity .5s}
+.zoom:hover::after{opacity:1}
+figcaption{color:var(--muted);font-size:.92rem;margin-top:12px}
+.info-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.info-box img{min-width:640px;width:100%;margin:auto;cursor:zoom-in;border-radius:10px;transition:transform .4s var(--ease)}
+.info-box img:hover{transform:scale(1.015)}
+.hint{display:none;color:var(--muted);font-size:.85rem;margin-top:10px}
+dialog{border:0;background:transparent;max-width:96vw;max-height:94vh;margin:auto}
+dialog::backdrop{background:rgba(20,26,58,.82);backdrop-filter:blur(4px)}
+dialog img{max-height:90vh;border-radius:12px;background:#fff}
+dialog button{position:absolute;top:8px;right:8px;width:42px;height:42px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:1.3rem;cursor:pointer}
+
+/* ============ 6. MÚSICA (visual diferenciado) ============ */
+#musica{background:var(--blue);color:#fff;position:relative;overflow:hidden;margin-top:clamp(64px,10vw,120px)}
+#musica .lead{color:rgba(255,255,255,.8)}
+.music{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,6vw,70px);align-items:center}
+.disc{width:clamp(160px,28vw,280px);aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#1a2250 0 3px,#222c66 3px 6px);position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);animation:spin 7s linear infinite;animation-play-state:paused}
+.disc::before{content:"";position:absolute;inset:34%;border-radius:50%;background:var(--paper);box-shadow:0 0 0 6px var(--blue)}
+.disc::after{content:"";position:absolute;inset:48.5%;border-radius:50%;background:var(--blue)}
+.playing .disc{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.eq{display:flex;align-items:flex-end;gap:5px;height:70px;margin-bottom:24px}
+.eq i{flex:1;max-width:10px;min-height:6px;height:12%;background:#fff;border-radius:4px;opacity:.85}
+.playing .eq i{animation:bounce 1s ease-in-out infinite alternate}
+@keyframes bounce{from{height:10%}to{height:100%}}
+#musica audio{filter:invert(1) hue-rotate(180deg);border-radius:999px}
+#musica h2{color:#fff}
+
+/* ============ 7. RODAPÉ ============ */
+footer{padding:70px 0 40px;text-align:center}
+footer .name{font-family:var(--serif);font-size:1.6rem;color:var(--blue)}
+footer q{display:block;color:var(--muted);margin:8px 0 28px;quotes:none}
+.social{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;list-style:none;margin-bottom:34px}
+.social a{display:inline-block;padding:10px 22px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:.95rem;transition:all .3s var(--ease)}
+.social a:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-4px) rotate(-2deg);box-shadow:0 12px 24px -10px rgba(64,96,245,.6)}
+footer small{color:var(--muted)}
+
+/* ============ 8. ANIMAÇÃO DE ENTRADA ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ 9. RESPONSIVO ============ */
+@media(max-width:860px){
+  .menu{display:block}
+  nav{position:fixed;inset:64px 0 auto 0;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 24px 24px;transform:translateY(-130%);transition:transform .45s var(--ease);visibility:hidden}
+  nav.open{transform:none;visibility:visible}
+  nav ul{flex-direction:column;gap:4px}
+  nav a{display:block;padding:12px 0;font-size:1.05rem}
+  .hero,.intro,.music{grid-template-columns:1fr}
+  .photo{max-width:280px;order:-1;justify-self:start}
+  .disc{margin:auto}
+  .hint{display:block}
+  .scroll-hint{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal,.hero h1 span i{opacity:1;transform:none}
+}
